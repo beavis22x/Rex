@@ -1,18 +1,25 @@
-// const request = new XMLHttpRequest();
-// request.open("GET", "../../data/file.json", false);
-// request.send(null)
-// var my_JSON_object = JSON.parse(request.responseText);
-// alert (my_JSON_object.result[0]);
+if (!process.argv[2]) {
+    throw "path1 is invalid"
+}
 
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if (!process.argv[3]) {
+    throw "path2 is invalid"
+}
 
-const difference = (obj1, obj2) => {
+const path1 = process.argv[2].trim();
+const path2 = process.argv[3].trim();
 
-    //  const obj1 = JSON.parse(file1),
-    //        obj2 = JSON.parse(file2);
-    // console.log(Object.prototype.toString.call(obj2))
+const fs = require('fs');
 
+let rawdata1 = fs.readFileSync(path1);
+let rawdata2 = fs.readFileSync(path2);
+
+const obj1 = JSON.parse(rawdata1);
+const obj2 = JSON.parse(rawdata2);
+
+console.dir(difference(obj1, obj2), { depth: null });
+
+function difference(obj1, obj2) {
 
     // Make sure an object to compare is provided
     if (!obj1 || Object.prototype.toString.call(obj1) !== '[object Object]') {
@@ -23,14 +30,13 @@ const difference = (obj1, obj2) => {
         throw ('Second argument is not an object');
     }
 
-
     const differences = {};
 
     /**
      * Check if two arrays are equal
      * @param  {Array}  arr1 The first array
      * @param  {Array}  arr2 The second array
-     * @return {Boolean}      If true, both arrays are equal
+     * @return {Boolean}  If true, both arrays are equal
      */
     const arraysMatch = function (arr1, arr2) {
 
@@ -109,98 +115,13 @@ const difference = (obj1, obj2) => {
     for (let key in obj2) {
         if (obj2.hasOwnProperty(key)) {
             if (!obj1[key]) {
-                differences[`add property ${key}`] = obj2[key];             // if (Object.prototype.toString.call(obj1[key]) === '[object Object]') {
-                                                                            //  let deepCopy = JSON.parse(JSON.stringify(obj2[key])) //Simplest way to make deep copy of object
-                                                                            //  differences[`add property ${key}`] = deepCopy;
-                                                                            //         }
-                                                                            //     const objDiff = difference(obj1[key], item2);
-                                                                            //     if (Object.keys(objDiff).length > 0) {
-                                                                            //         differences[key] = objDiff;
-
-                }
-            }
-        }
-
-
-
-return differences;
-
-}
-;
-
-
-const obj1 = {
-    "firstName": "John",
-    "lastName": "Smith",
-    "isAlive": true,
-    "age": 27,
-    "address": {
-        "streetAddress": "21 2nd Street",
-        "city": "New York",
-        "state": "NY",
-        "postalCode": "10021-3100"
-    }
-};
-const obj2 = {
-    "first_name": "Alex",
-    "lastName": "Smith",
-    "isAlive": false,
-    "Age": 27,
-    "address": {
-        "streetAddress": "21 2nd Street",
-        "city": "Chicago",
-        "state": "IL",
-        "asd": {
-            ad: 2,
-            a: {
-                asd: 1,
-                as: {
-                    a: 121
-                }
-            }
-        }
-    },
-    "asd": {
-        ad: 2,
-        a: {
-            asd: 1,
-            as: {
-                a: 121
+                differences[`add property ${key}`] = obj2[key];
             }
         }
     }
 
+    return differences;
 }
 
-const order1 = {
-    sandwich: 'tuna',
-    chips: true,
-    drink: 'soda',
-    order: 1,
-    toppings: ['pickles', 'mayo', 'lettuce'],
-    details: {
-        name: 'Chris',
-        phone: '555-555-5555',
-        email: 'no@thankyou.com'
-    },
-    otherVal1: '1'
-};
-
-const order2 = {
-    sandwich: 'turkey',
-    chips: true,
-    drink: 'soda',
-    order: 2,
-    toppings: ['pickles', 'lettuce'],
-    details: {
-        name: 'Jon',
-        phone: '(555) 555-5555',
-        email: 'yes@please.com'
-    },
-    otherVal2: '2'
-};
 
 
-
-console.log(difference(order1, order2));
-// console.log(difference(obj1, obj2));
