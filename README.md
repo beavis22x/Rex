@@ -15,7 +15,7 @@ Running from the command line in format:
 ***
 No special data structures were used in this script.The only special feature I can mention is the recursive function that runs when nested objects are encountered. I think the upper bound of the algorithm is O(n) because I don't use anything more complicated than a single for loop to iterate through the array.
 ***
-####Function difference:
+#### Function difference:
 
     * Compare two JSON files and return object with differences
     * @param  {object}   obj1        The first object
@@ -30,7 +30,7 @@ We have two helpers functions arraysMatch and compare
 
 3. Loop through the second object and find missing items. If the first one doesn't have the same key we add the key-value pair in differences object with the note in the key “add property”.
 
-#####Function compare:
+##### Function compare:
 
      * Compare two items and push non-matches to object
      * @param  {*}       item1 The value of first object
@@ -51,7 +51,7 @@ As the value in JSON may contain only string, number, object, array, true, false
 
 6. Catches primitives except bigint, symbol. If the items are unequal we take the key of object and value with the note “changed from ‘item1’ to ‘item2’ ” and add it in differences object.  
 
-#####Function arraysMatch:
+##### Function arraysMatch:
 
      * Check if two arrays are equal
      * @param  {Array}     arr1 The first array
