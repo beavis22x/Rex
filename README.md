@@ -17,10 +17,10 @@ No special data structures were used in this script.The only special feature I c
 ***
 #### Function difference:
 
-    * Compare two JSON files and return object with differences
+    * Compare two objects and return object with differences
     * @param  {object}   obj1        The first object
     * @param  {object}   obj2        The second object
-    * @return {object}   differences If true, both arrays are equal
+    * @return {object}   differences Object with differences
  
 We have two helpers functions arraysMatch and compare
  
